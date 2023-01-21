@@ -4,10 +4,10 @@ from logistic.models import Product, Stock
 
 
 @admin.register(Product)
-class SensorAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'description']
 
 
 @admin.register(Stock)
-class SensorAdmin(admin.ModelAdmin):
+class StockAdmin(admin.ModelAdmin):
     list_display = ['id', 'address']
