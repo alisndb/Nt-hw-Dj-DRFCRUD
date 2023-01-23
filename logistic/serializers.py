@@ -26,7 +26,11 @@ class StockSerializer(serializers.ModelSerializer):
         positions = validated_data.pop('positions')
         stock = super().create(validated_data)
 
-        StockProduct.objects.create(stock=stock, **positions)
+        for position in positions:
+            StockProduct.objects.create(stock=stock,
+                                        product=position['product'],
+                                        quantity=position['quantity'],
+                                        price=position['price'])
 
         return stock
 
@@ -34,6 +38,10 @@ class StockSerializer(serializers.ModelSerializer):
         positions = validated_data.pop('positions')
         stock = super().update(instance, validated_data)
 
-        StockProduct.objects.update_or_create(stock=stock, **positions)
+        for position in positions:
+            StockProduct.objects.update_or_create(stock=stock,
+                                                  product=position['product'],
+                                                  quantity=position['quantity'],
+                                                  price=position['price'])
 
         return stock
